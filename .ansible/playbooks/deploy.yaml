@@ -28,4 +28,4 @@
     - name: Start application
       ansible.builtin.command: pm2 serve dist 3000 --spa --name {{frontend_name}}
       args:
-        chdir: /deployments/{{frontend_name}}
+        chdir: "{{path_prefix}}/deployments/{{frontend_name}}"
