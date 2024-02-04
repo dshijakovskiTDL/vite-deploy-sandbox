@@ -26,6 +26,6 @@
       ignore_errors: yes
 
     - name: Start application
-      ansible.builtin.command: pm2 serve dist 3000 --spa --name {{frontend_name}}
+      ansible.builtin.command: pm2 serve . 3000 --spa --name {{frontend_name}}
       args:
         chdir: "{{path_prefix}}/deployments/{{frontend_name}}"
