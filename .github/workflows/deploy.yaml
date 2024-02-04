@@ -8,8 +8,8 @@ on:
 
 
 env:
-  VITE_NAME: Elena
-  VITE_AGE: 24
+  VITE_NAME: Elena<3Daniel
+  VITE_AGE: 99999
 
 jobs:
   setup:
