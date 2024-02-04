@@ -6,9 +6,8 @@ on:
 
   workflow_dispatch:
 
-
 env:
-  VITE_NAME: Elena<3Daniel
+  VITE_NAME: John Doe
   VITE_AGE: 99999
 
 jobs:
@@ -35,7 +34,3 @@ jobs:
         with:
           playbook: deploy.yaml
           directory: .ansible/playbooks
-
-
-
-
