@@ -5,16 +5,16 @@
   environment:
     NODE_ENV: production
   tasks:
-  - name: Clear out previous src
-    ansible.builtin.command: rm -rf {{frontend_name}}
-    args:
-      chdir: /deployments
+    - name: Clear out previous src
+      ansible.builtin.command: rm -rf {{frontend_name}}
+      args:
+        chdir: /deployments
 
-  - name: Create path to deployment
-    ansible.builtin.file:
-      path: /deployments/{{frontend_name}}
-      state: directory
-      mode: '0777'
+    - name: Create path to deployment
+      ansible.builtin.file:
+        path: /deployments/{{frontend_name}}
+        state: directory
+        mode: '0777'
 
     - name: Copy dist to deployment
       ansible.posix.synchronize:
