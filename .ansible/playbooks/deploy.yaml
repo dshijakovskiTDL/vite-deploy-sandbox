@@ -3,8 +3,6 @@
   vars:
     path_prefix: /Users/danielshijakovski/Desktop/Daniel/Sandbox
     frontend_name: vite-sandbox-app
-  environment:
-    NODE_ENV: production
   tasks:
     - name: Create path to deployment
       ansible.builtin.file:
