@@ -1,20 +1,21 @@
 - name: Deploy App
   hosts: localhost
   vars:
+    path_prefix: /Users/danielshijakovski/Desktop/Daniel/Sandbox
     frontend_name: vite-sandbox-app
   environment:
     NODE_ENV: production
   tasks:
     - name: Create path to deployment
       ansible.builtin.file:
-        path: /deployments/{{frontend_name}}
+        path: {{ path_prefix }}/deployments/{{frontend_name}}
         state: directory
         mode: '0777'
 
     - name: Copy dist to deployment
       ansible.posix.synchronize:
         src: ../../dist/
-        dest: /deployments/{{frontend_name}}
+        dest: {{ path_prefix }}/deployments/{{frontend_name}}
 
     - name: Stop the process
       ansible.builtin.command: pm2 stop {{frontend_name}}
