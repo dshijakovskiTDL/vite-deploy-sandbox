@@ -1,0 +1,35 @@
+- name: Deploy App
+  hosts: localhost
+  vars:
+  frontend_name: vite-sandbox-app
+  environment:
+    NODE_ENV: production
+  tasks:
+  - name: Clear out previous src
+    ansible.builtin.command: rm -rf {{frontend_name}}
+    args:
+      chdir: /deployments
+
+  - name: Create path to deployment
+    ansible.builtin.file:
+      path: /deployments/{{frontend_name}}
+      state: directory
+      mode: '0777'
+
+    - name: Copy dist to deployment
+      ansible.posix.synchronize:
+        src: ../../dist/
+        dest: /deployments/{{frontend_name}}
+
+    - name: Stop the process
+      ansible.builtin.command: pm2 stop {{frontend_name}}
+      ignore_errors: yes
+
+    - name: Delete the process
+      ansible.builtin.command: pm2 delete {{frontend_name}}
+      ignore_errors: yes
+
+    - name: Start application
+      ansible.builtin.command: pm2 serve dist 3000 --spa --name {{frontend_name}}
+      args:
+        chdir: /deployments/{{frontend_name}}

@@ -1,0 +1,37 @@
+name: Deploy Vite App - Sandbox
+
+on:
+  push:
+    branches: [main]
+
+  workflow_dispatch:
+
+
+env:
+  VITE_NAME: Elena
+  VITE_AGE: 24
+
+jobs:
+  setup:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@main
+
+      - name: Export env variables
+        run: |
+          echo "VITE_NAME=$VITE_NAME" > .env
+          echo "VITE_AGE=$VITE_AGE" > .env
+
+      - name: Build application
+        run: |
+          npm run build
+
+      - name: Deploy app on server
+        uses: dawidd6/action-ansible-playbook@v2
+        with:
+          playbook: deploy.yaml
+          directory: .ansible/playbooks
+
+
+
+
