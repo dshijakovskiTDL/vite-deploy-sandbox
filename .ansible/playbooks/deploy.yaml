@@ -4,16 +4,21 @@
     path_prefix: /Users/danielshijakovski/Desktop/Daniel/Sandbox
     frontend_name: vite-sandbox-app
   tasks:
+    - name: Delete existing dist folder
+      ansible.builtin.file:
+        path: "{{ path_prefix }}/deployments/{{ frontend_name }}"
+        state: absent
+
     - name: Create path to deployment
       ansible.builtin.file:
-        path: "{{path_prefix}}/deployments/{{frontend_name}}"
+        path: "{{ path_prefix }}/deployments/{{ frontend_name }}"
         state: directory
         mode: '0777'
 
     - name: Copy dist to deployment
       ansible.posix.synchronize:
         src: ../../dist/
-        dest: "{{path_prefix}}/deployments/{{frontend_name}}"
+        dest: "{{ path_prefix }}/deployments/{{ frontend_name }}"
 
     - name: Stop the process
       ansible.builtin.command: pm2 stop {{frontend_name}}
@@ -26,4 +31,4 @@
     - name: Start application
       ansible.builtin.command: pm2 serve . 3000 --spa --name {{frontend_name}}
       args:
-        chdir: "{{path_prefix}}/deployments/{{frontend_name}}"
+        chdir: "{{ path_prefix }}/deployments/{{ frontend_name }}"
