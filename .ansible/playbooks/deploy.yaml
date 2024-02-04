@@ -1,7 +1,7 @@
 - name: Deploy App
   hosts: localhost
   vars:
-  frontend_name: vite-sandbox-app
+    frontend_name: vite-sandbox-app
   environment:
     NODE_ENV: production
   tasks:
