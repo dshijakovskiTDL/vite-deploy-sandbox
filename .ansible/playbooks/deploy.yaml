@@ -5,11 +5,6 @@
   environment:
     NODE_ENV: production
   tasks:
-    - name: Clear out previous src
-      ansible.builtin.command: rm -rf {{frontend_name}}
-      args:
-        chdir: /deployments
-
     - name: Create path to deployment
       ansible.builtin.file:
         path: /deployments/{{frontend_name}}
