@@ -16,6 +16,10 @@ jobs:
     steps:
       - uses: actions/checkout@main
 
+      - name: Set env value
+        run: |
+          echo "ENVIRONMENT=madafaka" >> $GITHUB_ENV
+
       - name: Install deps
         run: |
           npm install
@@ -35,4 +39,4 @@ jobs:
           playbook: deploy.yaml
           directory: .ansible/playbooks
         env:
-          ENVIRONMENT: madafaka
+          ENVIRONMENT: ${{ env.ENVIRONMENT }}
