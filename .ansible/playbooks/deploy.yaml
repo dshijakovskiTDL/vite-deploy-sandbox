@@ -2,7 +2,7 @@
   hosts: localhost
   vars:
     path_prefix: /Users/danielshijakovski/Desktop/Daniel/Sandbox
-    frontend_name: vite-sandbox-app
+    frontend_name: vite-sandbox-app_{{ ENVIRONMENT }}
   tasks:
     - name: Delete existing dist folder
       ansible.builtin.file:
@@ -13,7 +13,7 @@
       ansible.builtin.file:
         path: "{{ path_prefix }}/deployments/{{ frontend_name }}"
         state: directory
-        mode: '0777'
+        mode: "0777"
 
     - name: Copy dist to deployment
       ansible.posix.synchronize:

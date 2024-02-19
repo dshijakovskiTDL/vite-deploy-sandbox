@@ -34,3 +34,5 @@ jobs:
         with:
           playbook: deploy.yaml
           directory: .ansible/playbooks
+        env:
+          ENVIRONMENT: madafaka
